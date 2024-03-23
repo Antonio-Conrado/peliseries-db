@@ -1,0 +1,39 @@
+.bg-wallpaper {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/public/Wallpaper.avif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 380px;
+    max-height: 700px;
+}
+
+.section {
+    overflow-x: scroll;
+}
+.section::-webkit-scrollbar{
+    display: none;
+    
+}
+.imgHeader{
+    transition: transform 1s ease ;
+}
+
+.h-img{
+    height: 360px;
+}
+
+
+@media(min-width:640px){
+    .h-img{
+        height: fit-content;
+    }
+    .h-header{
+        height: 380px;
+    }
+}
+
+@media(min-width:1024px){
+    .h-header{
+        height: 450px;
+    }
+}

@@ -1,8 +1,29 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+//layout
+import Layout from "./Layout/Layout";
+
+//pages
+import Index from "./pages/Index";
+
+//context
+import { ScrollProvider } from "./context/ScrollContext";
+
 
 function App() {
   return (
     <>
-      <h1 className="text-green-600 text-center ">Movie-TMDB</h1>
+      <BrowserRouter>
+        <ScrollProvider>
+          <Routes>
+            <Route path="/" element={<Layout />} >
+              <Route index element={<Index />} />
+              
+            </Route>
+          </Routes>
+        </ScrollProvider>
+
+      </BrowserRouter>
     </>
   )
 }
