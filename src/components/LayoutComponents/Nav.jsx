@@ -15,7 +15,7 @@ const Nav = () => {
     return (
         <nav className="h-96 sm:h-auto flex flex-col sm:flex-row justify-center  items-center gap-2 relative  py-4">
             <h1 className="text-white text-2xl font-bold hover:text-gray-300 mb-4 sm:mb-0 text-center ">
-                <Link to={'/'} > Movie-DB</Link>
+                <Link to={'/'} > PeliSeries-DB</Link>
             </h1>
 
             <Link
