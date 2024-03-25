@@ -31,7 +31,7 @@ const Index = () => {
             <Header
                 data={moviesImg}
             />
-            <main className=" relative sm:mt-20">
+            <main className="sm:mt-10">
                 <Populars />
                 <TopRated />
                 <PopularsSeries />

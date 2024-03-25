@@ -4,36 +4,36 @@ const Top = ({ top }) => {
     const { title, vote_average, release_date, poster_path, id } = top;
 
     return (
-        <div className=" flex-shrink-0 w-full sm:w-52 rounded-lg  ">
-            
+        <div className=" flex-shrink-0 rounded-lg w-40">
 
-            <div className="flex justify-center">
-            <Link to={`/topRated/${id}`}>
+
+            <div className="relative w-40">
+                <Link to={`/topRated/${id}`}>
                     <img
                         src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt="top rateed"
-                        className="rounded-lg h-52 "
+                        className="rounded-lg h-52 w-full"
                     />
                 </Link>
-                
+                <div className="font-bold text-white absolute top-0 right-1 mt-1 flex items-center justify-center backdrop-blur bg-gray-800 bg-opacity-50 rounded-full px-1">
+                    <span className="font-normal"> {vote_average.toString().slice(-0, 1)}</span>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-star ml-2" width="30" height="25" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#ff9300" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+                    </svg>
+                </div>
+
             </div>
 
 
             <div className=" rounded-b-lg p-2 ">
-            <Link to={`/topRated/${id}`}>
+                <Link to={`/topRated/${id}`}>
                     <h3 className="text-center  text-white text-lg py-2 font-bold">{title}</h3>
                 </Link>
-                
+
                 <ul>
                     <li className="font-bold text-white text-center">
-                        Fecha: <span className="font-normal"> {release_date}</span>
-                    </li>
-                    <li className="font-bold text-white flex items-center justify-center">
-                        Calificación: <span className="font-normal"> {vote_average}</span>
-
-                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-star ml-2" width="30" height="30" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#ff9300" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-                        </svg>
+                        <span className="font-normal"> {release_date.slice(-0, -6)}</span>
                     </li>
                 </ul>
 
@@ -42,8 +42,8 @@ const Top = ({ top }) => {
     );
 };
 
-Top.propTypes={
-    top : PropTypes.object.isRequired
+Top.propTypes = {
+    top: PropTypes.object.isRequired
 };
 
 export default Top;

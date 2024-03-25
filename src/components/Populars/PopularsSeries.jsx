@@ -31,20 +31,24 @@ const PopularsSeries = () => {
     const { containerRefPopularSeries } = useScroll();
 
     return (
-        <section className="container mx-auto mt-5 relative">
+        <section className="container mx-auto mt-2 relative">
             <ScrollRight
                 value='PopularSeries'
             />
             <ScrollLeft
                 value='PopularSeries'
             />
-            <Link
-                className="text-white block text-center font-bold text-2xl hover:text-gray-300 hover:cursor-pointer"
-                to={'/popular'}
-            >Series Populares</Link>
+            <div className="flex justify-center mb-2 ">
+                <div className="bg-green-400  w-1 mr-2"></div>
+                <Link
+                    className="text-white block text-center font-bold text-2xl hover:text-gray-300 hover:cursor-pointer"
+                    to={'/series-populares'}
+                >Series Populares</Link>
+            </div>
+
             <div
                 ref={containerRefPopularSeries}
-                className="my-2 mx-4 p-2 h-auto section grid grid-cols-2 gap-4 sm:flex sm:flex-row "
+                className="my-2 mx-9 p-2 h-auto section flex flex-row gap-3"
             >
 
                 {popularSeries.map(info => (

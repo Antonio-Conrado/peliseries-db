@@ -25,7 +25,7 @@ const Header = ({ data }) => {
                 setImgIndex(nextIndex);
             }
 
-        }, 7000);
+        }, 10000);
 
         return () => clearInterval(interval);
     }, [data.length, direction, imgIndex]);

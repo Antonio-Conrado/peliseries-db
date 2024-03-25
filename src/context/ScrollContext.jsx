@@ -7,6 +7,7 @@ const ScrollProvider = ({ children }) => {
     const containerRefTopRated = useRef(null)
     const containerRefPopular = useRef(null)
     const containerRefPopularSeries = useRef(null)
+    const containerRefCast= useRef(null)
     
     const handleScroll = (scrollOffset, value) => {
         if(value === 'topRated'){
@@ -25,7 +26,16 @@ const ScrollProvider = ({ children }) => {
                     behavior: 'smooth'
                 });
             }
-        }else{
+        }else if(value ==='cast'){
+            const container = containerRefCast.current;
+            if (container) {
+                container.scrollBy({
+                    left: scrollOffset,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        else{
             const container = containerRefPopularSeries.current;
             if (container) {
                 container.scrollBy({
@@ -43,6 +53,7 @@ const ScrollProvider = ({ children }) => {
                 containerRefTopRated,
                 containerRefPopular,
                 containerRefPopularSeries,
+                containerRefCast,
                 handleScroll
             }}
         >
