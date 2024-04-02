@@ -22,7 +22,7 @@ const MovieDetails = () => {
             }
         };
         getMovie();
-    }, [movie])
+    }, [])
 
     return (
         <>

@@ -12,9 +12,8 @@ const BackgroundHeader = ({ movie }) => {
             />
             
             </div>
-            <div className="hidden sm:block"> 
-            
-            <Nav/>
+            <div className="relative bottom-10 sm:bottom-0"> 
+                <Nav/>
             </div>
             
             

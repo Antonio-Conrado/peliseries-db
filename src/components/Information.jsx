@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import configHeaders from "../config/configHeaders";
 import axiosClient from "../config/axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cast from "./Cast/Cast";
 
 
@@ -10,31 +10,52 @@ const Information = ({ movie }) => {
     const { genres, vote_average } = movie;
     const [keyTrailer, setTrailer] = useState(undefined);
 
-    const trailer = async () => {
-        try {
-            const url = `https://api.themoviedb.org/3/movie/${id}/videos?language=es-US`;
-            const { data } = await axiosClient(url, configHeaders);
-            data.results.map(info => {
-                if (info.type === 'Trailer' && info.name === 'Tráiler Oficial en español') {
-                    setTrailer(info.key);
-                } else {
-                    setTrailer(undefined);
+    
+        const trailer = async () => {
+            try {
+                const url = `https://api.themoviedb.org/3/movie/${id}/videos?language=es-US`;
+                const { data } = await axiosClient(url, configHeaders);
+                
+                if(data.results.length === 0){
+                    const urlEN = `https://api.themoviedb.org/3/movie/${id}/videos`;
+                    const dataEN = await axiosClient(urlEN, configHeaders);
+                    dataEN.data.results.map(info => {
+                        if (info.type === "Trailer"){
+                            setTrailer(info.key);
+                        } 
+                    })
+                }else{
+                    data.results.map(info => {
+                        console.log(info)
+                        if (info.type === 'Trailer'){
+                            if (info.name.split(" ")[0].includes("Trailer") || info.name.split(" ")[0].includes("Tráiler")) {
+                                setTrailer(info.key);
+                            }
+                        }
+                    })
                 }
-            })
-        } catch (error) {
-            console.log(error)
-        }
-    };
+                
+                
+            } catch (error) {
+                console.log(error)
+            }
+        };
+
+    
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
         setIsModalOpen(true);
+        
         trailer();
+        
     };
 
     const closeModal = () => {
         setIsModalOpen(false);
     };
+
+    console.log(keyTrailer)
 
     return (
         <>
