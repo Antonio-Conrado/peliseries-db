@@ -1,14 +1,29 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const WallpaperImg = ({ info, isActive }) => {
+    const [imageLoaded, setImageLoaded] = useState(false);
+
+    const handleImageLoaded = () => {
+        setImageLoaded(true);
+    };
     return (
         <div className={isActive ? 'block' : 'hidden'} style={{ position: 'relative' }}>
-            <img
-                className="h-img object-cover opacity-65 object-center pointer-events-none"
-                src={`https://image.tmdb.org/t/p/original///${info.backdrop_path}`}
-                alt="..."
-            />
+
+            {!imageLoaded && (
+                <img src="/header.avif" alt="img" className="h-img object-cover opacity-65 object-center pointer-events-none" />
+            )}
+            {info.backdrop_path && (
+
+                <img
+                    className={`h-img object-cover opacity-65 object-center pointer-events-none ${imageLoaded ? 'opacity-100' : 'opacity-65'}`}
+                    src={`https://image.tmdb.org/t/p/original///${info.backdrop_path}`}
+                    alt="image"
+                    onLoad={handleImageLoaded}
+                />
+            )}
+
             <div className=' flex w-full justify-center absolute top-72 md:top-80 '>
                 <Link
                     to={`/movieDetails/${info.id}`}

@@ -1,65 +1,37 @@
-import { createContext, useRef } from "react";
+import React, { createContext, useRef } from "react";
 import PropTypes from 'prop-types';
 
 const ScrollContext = createContext();
 
 const ScrollProvider = ({ children }) => {
-    const containerRefTopRated = useRef(null)
-    const containerRefPopular = useRef(null)
-    const containerRefPopularSeries = useRef(null)
-    const containerRefCast= useRef(null)
-    
+    const containerRefs = {
+        topRated: useRef(null),
+        popular: useRef(null),
+        popularSeries: useRef(null),
+        cast: useRef(null),
+    };
+
     const handleScroll = (scrollOffset, value) => {
-        if(value === 'topRated'){
-            const container = containerRefTopRated.current;
-            if (container) {
-                container.scrollBy({
-                    left: scrollOffset,
-                    behavior: 'smooth'
-                });
-            }
-        }else if(value ==='popular'){
-            const container = containerRefPopular.current;
-            if (container) {
-                container.scrollBy({
-                    left: scrollOffset,
-                    behavior: 'smooth'
-                });
-            }
-        }else if(value ==='cast'){
-            const container = containerRefCast.current;
-            if (container) {
-                container.scrollBy({
-                    left: scrollOffset,
-                    behavior: 'smooth'
-                });
-            }
+        console.log(value)
+        const containerRef = containerRefs[value].current;
+        console.log(value)
+        if (containerRef) {
+            containerRef.scrollBy({
+                left: scrollOffset,
+                behavior: 'smooth'
+            });
         }
-        else{
-            const container = containerRefPopularSeries.current;
-            if (container) {
-                container.scrollBy({
-                    left: scrollOffset,
-                    behavior: 'smooth'
-                });
-            }
-        }
-        
     };
 
     return (
         <ScrollContext.Provider
             value={{
-                containerRefTopRated,
-                containerRefPopular,
-                containerRefPopularSeries,
-                containerRefCast,
+                containerRefs,
                 handleScroll
             }}
         >
             {children}
         </ScrollContext.Provider>
-
     );
 };
 

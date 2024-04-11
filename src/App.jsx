@@ -8,7 +8,7 @@ import Index from "./pages/Index";
 
 //context
 import { ScrollProvider } from "./context/ScrollContext";
-import MovieDetails from "./pages/MovieDetail";
+import DetailsInformation from "./pages/DetailsInformation";
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />} >
               <Route index element={<Index />} />
-              <Route path="movieDetails/:id" element={<MovieDetails />} />
+                <Route path=":ContentType/:id" element={<DetailsInformation />} />
               
             </Route>
           </Routes>

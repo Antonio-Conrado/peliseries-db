@@ -1,5 +1,3 @@
-
-import Populars from "../components/Populars/Populars";
 import BackgroundHeader from "../components/BackgroundHeader";
 import axiosClient from "../config/axios";
 import configHeaders from "../config/configHeaders";
@@ -7,10 +5,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Information from "../components/Information";
 
-const MovieDetails = () => {
+const DetailsInformation = () => {
     const { id } = useParams();
     const [movie, setMovie] = useState([]);
-
+    
     useEffect(() => {
         const getMovie = async () => {
             try {
@@ -22,8 +20,8 @@ const MovieDetails = () => {
             }
         };
         getMovie();
-    }, [])
-
+    }, []);
+    
     return (
         <>
             <BackgroundHeader 
@@ -36,4 +34,4 @@ const MovieDetails = () => {
 
     );
 };
-export default MovieDetails;
+export default DetailsInformation;

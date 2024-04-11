@@ -10,59 +10,55 @@ const Information = ({ movie }) => {
     const { genres, vote_average } = movie;
     const [keyTrailer, setTrailer] = useState(undefined);
 
-    
-        const trailer = async () => {
-            try {
-                const url = `https://api.themoviedb.org/3/movie/${id}/videos?language=es-US`;
-                const { data } = await axiosClient(url, configHeaders);
-                
-                if(data.results.length === 0){
-                    const urlEN = `https://api.themoviedb.org/3/movie/${id}/videos`;
-                    const dataEN = await axiosClient(urlEN, configHeaders);
-                    dataEN.data.results.map(info => {
-                        if (info.type === "Trailer"){
-                            setTrailer(info.key);
-                        } 
-                    })
-                }else{
-                    data.results.map(info => {
-                        console.log(info)
-                        if (info.type === 'Trailer'){
-                            if (info.name.split(" ")[0].includes("Trailer") || info.name.split(" ")[0].includes("Tráiler")) {
-                                setTrailer(info.key);
-                            }
-                        }
-                    })
-                }
-                
-                
-            } catch (error) {
-                console.log(error)
-            }
-        };
 
-    
+    const trailer = async () => {
+        try {
+            const url = `https://api.themoviedb.org/3/movie/${id}/videos?language=es-US`;
+            const { data } = await axiosClient(url, configHeaders);
+
+            if (data.results.length === 0) {
+                const urlEN = `https://api.themoviedb.org/3/movie/${id}/videos`;
+                const dataEN = await axiosClient(urlEN, configHeaders);
+                dataEN.data.results.map(info => {
+                    if (info.type === "Trailer") {
+                        setTrailer(info.key);
+                    }
+                })
+            } else {
+                data.results.map(info => {
+                    if (info.type === 'Trailer') {
+                        if (info.name.split(" ")[0].includes("Trailer") || info.name.split(" ")[0].includes("Tráiler")) {
+                            setTrailer(info.key);
+                        }
+                    }
+                })
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
+
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
         setIsModalOpen(true);
-        
+
         trailer();
-        
+
     };
 
     const closeModal = () => {
         setIsModalOpen(false);
     };
-
-    console.log(keyTrailer)
-
+    console.log(isModalOpen)
     return (
         <>
+
             <section className=" mt-3 ">
                 <div className="genres-header">
                     <h1 className="text-white   sm:relative  text-center md:text-right lg:text-center text-lg font-bold">{movie.title}</h1>
-                    <div className=" flex justify-center  mr-0  mt-2 md:mt-0">
+                    <div className="relative flex justify-center  mr-0  mt-2 md:mt-0">
                         <button
                             className="text-white bg-green-600  md:p-4 rounded-md p-2 mx-auto"
                             onClick={openModal}
@@ -156,7 +152,7 @@ const Information = ({ movie }) => {
                 <div></div>
                 <p className="text-gray-300  text-justify px-6"><span className="font-bold ">Sinópsis: </span>{movie.overview}</p>
             </div>
-            
+
             {movie.id
                 ?
                 <Cast
